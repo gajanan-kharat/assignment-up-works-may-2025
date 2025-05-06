@@ -1,62 +1,107 @@
 # YOLO Inference Project
 
-## Overview
-This project demonstrates the use of YOLO (You Only Look Once) for object detection. It includes scripts for running inference using PyTorch and ONNX models, converting models to ONNX format, and verifying required files.
+This project demonstrates the use of YOLO (You Only Look Once) for object detection and inference. It provides a robust implementation with support for both PyTorch and ONNX runtime, comprehensive logging, and extensive testing capabilities.
 
-## Requirements
-To run this project, ensure you have the following installed:
+## Features
 
-- Python 3.8 or later
-- Required Python packages (install using `pip install -r requirements.txt`):
+- 🚀 Dual inference support: PyTorch and ONNX runtime
+- 📊 Detailed logging system with both file and console output
+- 🔄 Automatic model conversion from PyTorch to ONNX format
+- 🧪 Comprehensive testing suite
+- 🖼️ Image preprocessing and visualization capabilities
+- 📈 Confidence score reporting for detections
+
+## Project Structure
+
+- **image.jpeg**: Sample input image for testing
+- **pytorch_result.jpg**: Output image with detection visualizations
+- **pytorch_test.py**: Quick test script for PyTorch-based inference
+- **README.md**: Project documentation
+- **requirements.txt**: Project dependencies
+- **test_components.py**: Unit tests for individual components
+- **test_env.py**: Environment validation script
+- **test_minimal.py**: Minimal test suite for quick validation
+- **yolo_inference.py**: Main inference script with PyTorch and ONNX support
+- **yolo_run.log**: Detailed execution logs
+- **yolo11n.pt**: Pre-trained YOLO model weights
+
+## Prerequisites
+
+- Python 3.8 or higher
+- CUDA-capable GPU (optional, for faster inference)
+- Required packages:
   - torch
   - torchvision
   - ultralytics
-  - onnx
-  - onnxruntime
   - opencv-python
-  - numpy
+  - onnx (optional)
+  - onnxruntime (optional)
 
-## Files in the Project
-- `yolo_inference.py`: Main script for running inference and model conversion.
-- `yolo11n.pt`: YOLO model file.
-- `requirements.txt`: List of required Python packages.
-- `pytorch_result.jpg`: Output image after PyTorch inference.
-- `yolo_run.log`: Log file for the inference process.
+## Installation
 
-## How to Run
-1. Install the required Python packages:
+1. Clone the repository
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
-2. Place the input image in the project directory and update the `IMAGE_NAME` variable in `yolo_inference.py` if needed.
+## Usage
 
-3. Run the main script:
-   ```bash
-   python yolo_inference.py
-   ```
+### 1. Environment Setup
+First, validate your environment:
+```bash
+python test_env.py
+```
 
-4. Check the output image (`pytorch_result.jpg`) and logs (`yolo_run.log`) for results.
+### 2. Running Inference
+Execute the main inference script:
+```bash
+python yolo_inference.py
+```
 
-## Notes
-- Ensure the input image file exists and is correctly named as per the `IMAGE_NAME` variable in the script.
-- The ONNX conversion step requires ONNX and ONNX Runtime to be installed.
-- Logs provide detailed information about the process and any errors encountered.
+The script will:
+- Load the YOLO model
+- Run inference on the input image
+- Convert the model to ONNX format (if supported)
+- Run ONNX inference (if available)
+- Save results to 'pytorch_result.jpg'
 
-## Troubleshooting
-- If you encounter errors, check the `yolo_run.log` file for details.
-- Ensure all required files are present in the project directory.
+### 3. Testing
 
-## Enhancements
+#### Quick Validation
+```bash
+python test_minimal.py
+```
 
-### Additional Features
-- **ONNX Conversion**: The project supports converting PyTorch models to ONNX format for broader compatibility.
-- **Logging**: Detailed logs are generated in `yolo_run.log` to help debug and monitor the process.
-- **Error Handling**: The script includes robust error handling to ensure smooth execution.
+#### Component Testing
+```bash
+python test_components.py
+```
 
-### Future Improvements
-- **Batch Processing**: Add support for processing multiple images in a single run.
-- **Custom Models**: Allow users to specify custom YOLO models via command-line arguments.
-- **Visualization**: Integrate a visualization tool to display inference results interactively.
-- **Docker Support**: Provide a Dockerfile for containerized execution.
+#### PyTorch-specific Testing
+```bash
+python pytorch_test.py
+```
 
+## Logging
+
+The project maintains detailed logs in 'yolo_run.log', including:
+- Model loading status
+- Inference progress
+- Error messages and stack traces
+- Performance metrics
+
+## Output
+
+- Detection results are saved as 'pytorch_result.jpg'
+- Detection details including class IDs and confidence scores are logged
+- ONNX model (if conversion is successful) is saved as 'yolo11n.onnx'
+
+## Error Handling
+
+The project includes comprehensive error handling for:
+- Missing dependencies
+- File not found scenarios
+- Model loading failures
+- Inference errors
+- ONNX conversion issues
